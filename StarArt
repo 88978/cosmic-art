@@ -2,5 +2,30 @@
 pragma solidity ^0.8.0;
 
 contract StarArt {
-    string public art = unicode"✨✨✨";
+    string[] private stars;
+    uint256 public currentIndex;
+
+    constructor() {
+        stars.push(unicode"✦ ✦ ✦");
+        stars.push(unicode"✧･ﾟ: *✧･ﾟ:*");
+        stars.push(unicode"✺ ✹ ✵ ✶ ✷ ✸ ✹ ✺");
+        stars.push(unicode"★ ★ ☆ ☆ ☆");
+    }
+
+    function getArt() public view returns (string memory) {
+        return stars[currentIndex];
+    }
+
+    function setArt(uint256 index) public {
+        require(index < stars.length, "Index out of range");
+        currentIndex = index;
+    }
+
+    function addStarArt(string calldata newArt) public {
+        stars.push(newArt);
+    }
+
+    function totalStyles() public view returns (uint256) {
+        return stars.length;
+    }
 }
